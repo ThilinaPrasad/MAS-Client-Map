@@ -8,8 +8,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+
 </head>
 <body>
+  <!--Side Nav Bar-->
+  <ul id="slide-out" class="sidenav">
+      <li><div class="user-view">
+        <center><a href="#" ><center><img src="../assets/nav-logo.png"></center></a></center>
+        <h4 align="center" class="white-text font_01" style="margin-top: 0;">Client Map</h4>
+      </div></li>
+      <li><div class="divider"></div></li>
+      <li><h5 align="center" class="white-text font_01" style="margin-bottom: 0;">ADD NEW CLIENT</h5></li>
+      <li>
+        <div class="row" style="padding:0 20px;">
+        <form class="col s12">
+          <div class="row">
+              <div class="row" style="margin-bottom: 0;">
+                  <div class="input-field col s12">
+                    <input id="name" type="text" class="validate">
+                    <label for="name">Client Name</label>
+                  </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 0;">
+                    <div class="input-field col s12">
+                      <textarea id="about" class="materialize-textarea"></textarea>
+                      <label for="about">About</label>
+                    </div>
+                  </div>
+
+                <div class="row" style="margin-bottom: 0;">
+                    <div class="input-field col s12">
+                      <textarea id="address" class="materialize-textarea"></textarea>
+                      <label for="address">Address</label>
+                    </div>
+                  </div>
+                <div class="row" style="margin-bottom: 0;">
+                <div class="input-field col s6">
+                    <input id="latitude" type="text" class="validate">
+                    <label for="latitude">Latitude</label>
+                  </div>
+            <div class="input-field col s6">
+              <input id="longitude" type="text" class="validate">
+              <label for="longitude">Longitude</label>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" type="button" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+        </form>
+      </div>
+    </li>
+    </ul>
+  
+
 <!--Google map section-->
 <div id="map" style="height:100vh; width:100vw;"></div>
 <!--Floting Button Section-->
@@ -19,7 +73,7 @@
   </a>
   <ul>
     <li><a class="btn-floating red waves-effect waves-light tooltipped windowMode" data-position="left" data-tooltip="Present ON" onclick="togglePresentMode(this);"><i class="material-icons" id="presentMode">fullscreen</i></a></li>
-    <li><a class="btn-floating yellow darken-1 waves-effect waves-light"><i class="material-icons">format_quote</i></a></li>
+    <li><a class="btn-floating yellow darken-1 waves-effect waves-light sidenav-trigger tooltipped" data-target="slide-out" data-position="left" data-tooltip="Add New Client"><i class="material-icons">add_circle_outline</i></a></li>
     <li><a class="btn-floating green waves-effect waves-light"><i class="material-icons">publish</i></a></li>
     <li><a class="btn-floating blue waves-effect waves-light"><i class="material-icons">attach_file</i></a></li>
   </ul>
@@ -30,6 +84,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCamFIG1ilV1zm3KGW5P7QXwvF5m_LiHSQ" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
     <script>
             require('../scripts/app.js')
             require('../scripts/styles.js')
@@ -57,6 +112,12 @@ ipcRenderer.on('present:on',function(){
   present = true;
     $("#presentMode").text('fullscreen_exit');
     $('.windowMode').attr('data-tooltip','Present OFF');
+});
+
+ipcRenderer.on('present:off',function(){
+  present = true;
+    $("#presentMode").text('fullscreen');
+    $('.windowMode').attr('data-tooltip','Present ON');
 });
         </script>
 </body>

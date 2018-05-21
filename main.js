@@ -64,12 +64,21 @@ const mainMenuTemplate = [
                 }
             },
             {
-                label:'Presenting Mode',
+                label:'Present On',
                 accelerator:process.platform == 'darwin' ? 'Command+P' : 'Ctrl+P',
                 click(){
                     mainWindow.setFullScreen(true);
                     mainWindow.setMenu(null);
                     mainWindow.webContents.send('present:on');
+                }
+            },
+            {
+                label:'Present OFF',
+                accelerator:process.platform == 'darwin' ? 'Command+O' : 'Ctrl+O',
+                click(){
+                    mainWindow.setFullScreen(false);
+                    mainWindow.setMenu(mainMenu);
+                    mainWindow.webContents.send('present:off');
                 }
             }
         ]

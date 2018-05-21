@@ -10,3 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function(){
     $('.tooltipped').tooltip();
   });
+
+// Side Nav
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
