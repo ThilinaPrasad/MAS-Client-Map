@@ -4,9 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>MAS Client Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 </head>
 <body>
-    
+<!--Google map section-->
+<div id="map" style="height:100vh; width:100vw;"></div>
+<!--Floting Button Section-->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">change_history</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating red waves-effect waves-light tooltipped windowMode" data-position="left" data-tooltip="Present ON" onclick="togglePresentMode(this);"><i class="material-icons" id="presentMode">fullscreen</i></a></li>
+    <li><a class="btn-floating yellow darken-1 waves-effect waves-light"><i class="material-icons">format_quote</i></a></li>
+    <li><a class="btn-floating green waves-effect waves-light"><i class="material-icons">publish</i></a></li>
+    <li><a class="btn-floating blue waves-effect waves-light"><i class="material-icons">attach_file</i></a></li>
+  </ul>
+</div>
+    <!--Scripts Goes here-->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCamFIG1ilV1zm3KGW5P7QXwvF5m_LiHSQ" type="text/javascript"></script>
+    <script>
+            require('../scripts/app.js')
+            require('../scripts/styles.js')
+        </script>
+
+        <script>
+        // Electron Application codes
+const {ipcRenderer} = require('electron');
+let present = false;
+function togglePresentMode(element){
+  if(!present){
+    ipcRenderer.send('present:on');
+    present = true;
+    $("#presentMode").text('fullscreen_exit');
+    $(element).attr('data-tooltip','Present OFF');
+  }else{
+    ipcRenderer.send('present:off');
+    present = false;
+    $("#presentMode").text('fullscreen');
+    $(element).attr('data-tooltip','Present ON');
+  }
+}
+
+ipcRenderer.on('present:on',function(){
+  present = true;
+    $("#presentMode").text('fullscreen_exit');
+    $('.windowMode').attr('data-tooltip','Present OFF');
+});
+        </script>
 </body>
 </html>
