@@ -1,0 +1,14 @@
+{
+  "name": "mas-client-map",
+  "version": "1.0.0",
+  "description": "This is the application that build for display the client service distribution of MAS Company around the srilanka",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Thilina Prasad",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^2.0.1"
+  }
+}
