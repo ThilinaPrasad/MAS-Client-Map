@@ -9,6 +9,7 @@
   "author": "Thilina Prasad",
   "license": "MIT",
   "dependencies": {
-    "electron": "^2.0.1"
+    "electron": "^2.0.1",
+    "electron-json-storage": "^4.1.0"
   }
 }
