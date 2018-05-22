@@ -4,12 +4,19 @@
   "description": "This is the application that build for display the client service distribution of MAS Company around the srilanka",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/build/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --asar=false --platform=win32 --arch=ia32 --icon=assets/build/icon.ico --prune=true --out=release-builds --version-string.CompanyName=\"Thilina Prasad\" --version-string.FileDescription=CE --version-string.ProductName=\"MAS Client Map\"",
+    "package-linux": "electron-packager . --overwrite --asar=false --platform=linux --arch=x64 --icon=assets/build/icon.png --prune=true --out=release-builds"
   },
   "author": "Thilina Prasad",
   "license": "MIT",
   "dependencies": {
     "electron": "^2.0.1",
-    "electron-json-storage": "^4.1.0"
+    "electron-json-storage": "^4.1.0",
+    "quickly-copy-file": "^1.0.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^12.1.0"
   }
 }

@@ -15,6 +15,8 @@
 </head>
 
 <body>
+<div  style="background: url('../assets/loading.gif') center no-repeat #fff;" id="pageLoad"></div>
+<div id='app'>
   <!--Add Clients Side Nav Bar-->
   <ul id="add-client" class="sidenav" style="padding-bottom: 0;">
     <li>
@@ -62,17 +64,7 @@
                 <label for="address">Address</label>
               </div>
             </div>
-            <div class="row" style="margin-bottom: 0;">
-              <div class="input-field col s6">
-                <input id="latitude" type="text" class="validate white-text">
-                <label for="latitude">Latitude</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="longitude" type="text" class="validate white-text">
-                <label for="longitude">Longitude</label>
-              </div>
-            </div>
-            <div class="file-field input-field" style="margin-bottom: 0;">
+            <div class="file-field input-field">
               <div class="btn btn-small">
                 <span>
                   <i class="material-icons large">file_upload</i>
@@ -151,6 +143,7 @@
       </li>
     </ul>
   </div>
+  </div>
   <!--Scripts Goes here-->
   <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -163,7 +156,16 @@
     require('../scripts/app.js')
     require('../scripts/styles.js')
   </script>
+<script>
+  //page loading animation part 1
+$(window).on('load', function() {
+    $("#pageLoad").fadeOut('fast');
+});
 
+$(document).ready(function() {
+    //page loading animation part 2
+    $("#app").fadeIn('fast');});
+</script>
   <script>
     // Electron Application codes
     const { ipcRenderer } = require('electron');
@@ -208,12 +210,11 @@
     });
   </script>
   <script>
+ let response;
+
     $("#submit").click(function () {
       var cname = $('#name').val().trim();
       var caddress = $('#address').val().trim();
-      var lat = $('#latitude').val().trim();
-      var long = $('#longitude').val().trim();
-
 hashCode = function(str){
     var hash = 0;
     if (str.length == 0) return hash;
@@ -229,18 +230,28 @@ hashCode = function(str){
 //Logo upload
 let logo_src =  document.getElementById("logo").files[0].path;
 let logo_name = hashCode(logo_src)+"."+logo_src.split('.').pop();
-let logo_destDir = 'storage/logos';
+let logo_destDir = 'resources/app/storage/logos';
 let logo_path = path.join(logo_destDir,logo_name);
 //PPt upload
       let src =  document.getElementById("ppt").files[0].path;
       let filename = hashCode(src)+"."+src.split('.').pop();
-      let destDir = 'storage/ppts';
+      let destDir = 'resources/app/storage/ppts';
       let file_path = path.join(destDir,filename);
-      if ((cname + caddress + lat + long).length > 0 && src.length>0) {
-        copyFile(src,file_path);
+      if ((cname + caddress).length > 0 && src.length>0) {
+        // Get Lat Long from address and save data
+        url = "https://maps.googleapis.com/maps/api/geocode/json?address="+caddress+"&key=AIzaSyCbJ6Y_E_zZgyr5kRwYpAAnNSxHtiBnX98"
+      $.get(url, function(data, status){
+        if(status=='success'){
+         var lat = data.results[0].geometry.location.lat;
+         var long = data.results[0].geometry.location.lng;
+         copyFile(src,file_path);
         copyFile(logo_src,logo_path);
         var newMarker = [{ name: cname, logo:logo_name ,file: filename, address: caddress, latitude: lat, longitude: long }];
         ipcRenderer.send('save:marker', newMarker);
+        }else{
+          M.toast({ html: '<i class="material-icons">report</i>&nbsp;&nbsp;Entered Location Error. Try Again!', classes: 'rounded' })
+        }
+    });
       } else {
         M.toast({ html: '<i class="material-icons">report</i>&nbsp;&nbsp;Fill all data before submitting!', classes: 'rounded' })
       }

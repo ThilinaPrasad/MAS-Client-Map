@@ -121,7 +121,7 @@ ipcMain.on('present:off', function () {
 
 //Open PPT
 ipcMain.on('open:ppt',function(e,file){
-    let file_path = path.join("storage/ppts",file);
+    let file_path = path.join("resources/app/storage/ppts",file);
     childProcess.spawn(file_path, {shell: true});
 });
 
@@ -151,11 +151,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 //save new marker data to json file
 ipcMain.on('save:marker', function (e, newmarker) {
-    console.log(oldMarkers);
         storage.set('markerData', oldMarkers.concat(newmarker), function (error) {
             if (error) { 
                 mainWindow.webContents.send('error',"Error Happned while saving data. Please try again."); 
             } else {
+                oldMarkers = oldMarkers.concat(newmarker);
                 mainWindow.webContents.send('success',"Successfully added new marker !."); 
              }
         });
