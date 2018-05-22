@@ -57,7 +57,7 @@ infoWindow = new google.maps.InfoWindow(); // create info window object
 
 // image icon for marker
 var image = {
-  url: "https://thilinaprasad.github.io/MAS-Client-Map/assets/marker.ico",
+  url: 'https://thilinaprasad.github.io/MAS-Client-Map/assets/marker.ico',
 };
 
 $.getJSON('../storage/markerData/markerData.json', function (data) {
