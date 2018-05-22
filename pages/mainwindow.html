@@ -45,10 +45,20 @@
                 <label for="name">Client Name</label>
               </div>
             </div>
-
+            <div class="file-field input-field" style="margin-bottom: 0;">
+              <div class="btn btn-small">
+                <span>
+                  <i class="material-icons large">filter_hdr</i>
+                </span>
+                <input type="file" multiple accept=".png,.jpg" id="logo" required>
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate white-text" type="text" placeholder="Client Logo">
+              </div>
+            </div>
             <div class="row" style="margin-bottom: 0;">
               <div class="input-field col s12">
-                <textarea id="address" class="materialize-textarea white-text"></textarea>
+                <textarea id="address" class="materialize-textarea white-text validate"></textarea>
                 <label for="address">Address</label>
               </div>
             </div>
@@ -102,14 +112,12 @@
       <div class="divider"></div>
     </li>
     <li>
-      <h5 align="center" class="white-text font_01" style="margin-bottom: 0;">View Clients</h5>
+      <h5 align="center" class="white-text font_01" style="margin-bottom: 10px;">View Available Clients</h5>
     </li>
     <li>
-      <div class="container" style="margin:0 20px;">
-        <div class="chip">
-          MAS Holdings
-          <i class="close material-icons">close</i>
-        </div>
+      <div class="container" style="margin:0 20px;" id="clients-view">
+        <!--View of available client data-->
+       
       </div>
     </li>
   </ul>
@@ -141,11 +149,6 @@
           <i class="material-icons">remove_red_eye</i>
         </a>
       </li>
-      <li>
-        <a class="btn-floating blue waves-effect waves-light">
-          <i class="material-icons">attach_file</i>
-        </a>
-      </li>
     </ul>
   </div>
   <!--Scripts Goes here-->
@@ -154,7 +157,7 @@
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCamFIG1ilV1zm3KGW5P7QXwvF5m_LiHSQ" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbJ6Y_E_zZgyr5kRwYpAAnNSxHtiBnX98" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
   <script>
     require('../scripts/app.js')
@@ -222,16 +225,21 @@ hashCode = function(str){
     }
     return hash.toString();
 }
+
+//Logo upload
+let logo_src =  document.getElementById("logo").files[0].path;
+let logo_name = hashCode(logo_src)+"."+logo_src.split('.').pop();
+let logo_destDir = 'storage/logos';
+let logo_path = path.join(logo_destDir,logo_name);
+//PPt upload
       let src =  document.getElementById("ppt").files[0].path;
       let filename = hashCode(src)+"."+src.split('.').pop();
       let destDir = 'storage/ppts';
       let file_path = path.join(destDir,filename);
       if ((cname + caddress + lat + long).length > 0 && src.length>0) {
-      copyFile(src,file_path , function(error) {
-      if (error) return console.error(error);
-        
-      });
-        var newMarker = [{ name: cname, file: filename, address: caddress, latitude: lat, longitude: long }];
+        copyFile(src,file_path);
+        copyFile(logo_src,logo_path);
+        var newMarker = [{ name: cname, logo:logo_name ,file: filename, address: caddress, latitude: lat, longitude: long }];
         ipcRenderer.send('save:marker', newMarker);
       } else {
         M.toast({ html: '<i class="material-icons">report</i>&nbsp;&nbsp;Fill all data before submitting!', classes: 'rounded' })

@@ -60,7 +60,6 @@ var image = {
   url: 'http://www.uomleos.org/wp-content/uploads/2018/04/marker_icon.png',
 };
 
-
 $.getJSON('../storage/markerData/markerData.json', function (data) {
 
   // Over lapping marker object
@@ -94,14 +93,14 @@ var oms = new OverlappingMarkerSpiderfier(map, {
   });
 
   google.maps.event.addListener(mas_marker, 'click', function () {
-    var content = "<b>" + mas_marker.name + "</b><br>" + mas_marker.address + "<br><br>&diams;&nbsp;Click to spider all clients<br>&diams;&nbsp;Double tap to open presentation";
+    var content = "<center><img src='../logo.png' style='margin:10px 0;'><br><b style='font-size:17px;'>" + mas_marker.name + "</b><br>" + mas_marker.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
     infoWindow.setContent(content);
     infoWindow.open(map, mas_marker);
   });
 
   //marker hover effect
   google.maps.event.addListener(mas_marker, 'mouseover', function () {
-    var content = "<b>" + mas_marker.name + "</b><br>" + mas_marker.address + "<br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
+    var content = "<center><img src='../logo.png' style='margin:10px 0;'><br><b style='font-size:17px;'>" + mas_marker.name + "</b><br>" + mas_marker.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
     infoWindow.setContent(content);
     infoWindow.open(map, mas_marker);
   });
@@ -112,7 +111,7 @@ var oms = new OverlappingMarkerSpiderfier(map, {
   //ADD MAS MARKER
 
   let new_id = data.length+1;
-
+  let clients = '<div class="chip">MAS Intimates (Pvt) Ltd</div>';
   if (data.length > 0) {
     for (var i = 0; i < data.length; i++) {
       var place = data[i];
@@ -124,13 +123,13 @@ var oms = new OverlappingMarkerSpiderfier(map, {
         animation: google.maps.Animation.DROP,
         map: map,
         name: place.name,
-        address: place.address
+        address: place.address,
+        logo : place.logo
       });
 
       oms.addMarker(marker);
       google.maps.event.addListener(marker, 'dblclick', function () { // marker onclick event
         // Presentation Open part goes here
-        console.log("dbl");
         ipcRenderer.send('open:ppt',this.file);
       });
 
@@ -139,14 +138,14 @@ var oms = new OverlappingMarkerSpiderfier(map, {
       });
 
       google.maps.event.addListener(marker, 'click', function () {
-        var content = "<b>" + this.name + "</b><br>" + this.address + "<br><br>&diams;&nbsp;Click to spider all clients<br>&diams;&nbsp;Double tap to open presentation";
+        var content = "<center><img src='../storage/logos/"+this.logo+"' style='margin:10px 0;'><br><b style='font-size:17px;'>" + this.name + "</b><br>" + this.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
         infoWindow.setContent(content);
         infoWindow.open(map, this);
       });
 
       //marker hover effect
       google.maps.event.addListener(marker, 'mouseover', function () {
-        var content = "<b>" + this.name + "</b><br>" + this.address + "<br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
+        var content = "<center><img src='../storage/logos/"+this.logo+"' style='margin:10px 0;'><br><b style='font-size:17px;'>" + this.name + "</b><br>" + this.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
         infoWindow.setContent(content);
         infoWindow.open(map, this);
       });
@@ -154,7 +153,10 @@ var oms = new OverlappingMarkerSpiderfier(map, {
         infoWindow.close();
       });
 
+      //Load available client in view
+      clients += '<div class="chip">'+place.name+'</div>';
+
     }
   }
-
+$('#clients-view').html(clients);
 });
