@@ -71,12 +71,6 @@ var image = {
 
 $.getJSON('../storage/markerData/markerData.json', function (data) {
 
-  // Over lapping marker object
-var oms = new OverlappingMarkerSpiderfier(map, {
-  markersWontMove: true,
-  markersWontHide: true,
-  basicFormatEvents: true
-});
 
   //Add MAS Marker
   var coordinates = { lat: 6.8231014, lng: 79.8935539 };
@@ -91,14 +85,9 @@ var oms = new OverlappingMarkerSpiderfier(map, {
 
   });
 
-  oms.addMarker(mas_marker);
   google.maps.event.addListener(mas_marker, 'dblclick', function () { // marker onclick event
     // Presentation Open part goes here
     //alert('Add Slide show to open : ' + mas_marker.file);
-  });
-
-  google.maps.event.addListener(mas_marker, 'spider_click', function () { // 
-
   });
 
   google.maps.event.addListener(mas_marker, 'click', function () {
@@ -136,20 +125,8 @@ var oms = new OverlappingMarkerSpiderfier(map, {
         logo : place.logo
       });
 
-      oms.addMarker(marker);
-      google.maps.event.addListener(marker, 'dblclick', function () { // marker onclick event
-        // Presentation Open part goes here
-        ipcRenderer.send('open:ppt',this.file);
-      });
-
-      google.maps.event.addListener(marker, 'spider_click', function () { // 
-
-      });
-
       google.maps.event.addListener(marker, 'click', function () {
-        var content = "<center><img src='../storage/logos/"+this.logo+"' style='margin:10px 0;'><br><b style='font-size:17px;'>" + this.name + "</b><br>" + this.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
-        infoWindow.setContent(content);
-        infoWindow.open(map, this);
+        ipcRenderer.send('open:ppt',this.file);
       });
 
       //marker hover effect

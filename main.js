@@ -7,7 +7,7 @@ const { app, BrowserWindow, Menu, ipcMain } = electron;
 let mainMenu;
 
 //set production env
-//process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'production';
 
 //load old markers
 const storage = require('electron-json-storage');
