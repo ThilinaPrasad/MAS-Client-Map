@@ -165,30 +165,48 @@
       let present = false;
 
       function togglePresentMode(element) {
+
         if (!present) {
           ipcRenderer.send('present:on');
           present = true;
           $("#presentMode").text('fullscreen_exit');
           $(element).attr('data-tooltip', 'Present OFF');
+          M.toast({ html: '<i class="material-icons">fullscreen_exit</i>&nbsp;&nbsp;Press&nbsp;&nbsp;<div class="chip">Esc</div>&nbsp;&nbsp;key to exit', classes: 'rounded' });
         } else {
           ipcRenderer.send('present:off');
           present = false;
           $("#presentMode").text('fullscreen');
           $(element).attr('data-tooltip', 'Present ON');
+          M.toast({ html: '<i class="material-icons">fullscreen_exit</i>&nbsp;&nbsp;Press&nbsp;&nbsp;<div class="chip">Ctrl+P</div>&nbsp;&nbsp;to Present Mode', classes: 'rounded' });
         }
       }
+
+    $(document).keyup(function (e) {
+        if (e.keyCode == 27) {
+          if(present){
+          ipcRenderer.send('present:off');
+          $("#presentMode").text('fullscreen');
+          $('.windowMode').attr('data-tooltip', 'Present ON');
+          present = false;
+          M.toast({ html: '<i class="material-icons">fullscreen</i>&nbsp;&nbsp;Press&nbsp;&nbsp;<div class="chip">Ctrl+P</div>&nbsp;&nbsp;to Present Mode', classes: 'rounded' });
+          }
+        }
+      });
 
       ipcRenderer.on('present:on', function () {
         present = true;
         $("#presentMode").text('fullscreen_exit');
         $('.windowMode').attr('data-tooltip', 'Present OFF');
+        M.toast({ html: '<i class="material-icons">fullscreen_exit</i>&nbsp;&nbsp;Press&nbsp;&nbsp;<div class="chip">Esc</div>&nbsp;&nbsp;key to exit', classes: 'rounded' });
       });
 
       ipcRenderer.on('present:off', function () {
-        present = true;
+        if(present){
+        present = false;
         $("#presentMode").text('fullscreen');
         $('.windowMode').attr('data-tooltip', 'Present ON');
-      });
+        M.toast({ html: '<i class="material-icons">fullscreen</i>&nbsp;&nbsp;Press&nbsp;&nbsp;<div class="chip">Ctrl+P</div>&nbsp;&nbsp;to Present Mode', classes: 'rounded' });
+      }});
 
       ipcRenderer.on('error', function (e, msg) {
         M.toast({ html: '<i class="material-icons">location_off</i>&nbsp;&nbsp;' + msg, classes: 'rounded' })
@@ -272,27 +290,27 @@
                       break;
                     }
                   }
-                  storage.set('markerData', data,function (error) {
-                        console.log('saved');
-                      });
+                  storage.set('markerData', data, function (error) {
+                    console.log('saved');
+                  });
                 });
-                
+
                 $.confirm({
-          theme: 'supervan',
-          title: 'Deleted Succesfully!',
-          content: 'Refresh map to update the marker data!',
-          buttons: {
-            confirm: {
-              text: 'Reload',
-              btnClass: 'btn-green',
-              keys: ['enter'],
-              action: function () {
-                location.reload();
-              }
-            },
-          
-          }
-        });
+                  theme: 'supervan',
+                  title: 'Deleted Succesfully!',
+                  content: 'Refresh map to update the marker data!',
+                  buttons: {
+                    confirm: {
+                      text: 'Reload',
+                      btnClass: 'btn-green',
+                      keys: ['enter'],
+                      action: function () {
+                        location.reload();
+                      }
+                    },
+
+                  }
+                });
               }
             },
             cancel: function () {
