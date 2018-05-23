@@ -50,6 +50,7 @@ $(document).ready(function() {
 connChecker();
 // Internet Connection checker
 
+
 //Initialize the map
 //Map Initialize
 
@@ -84,21 +85,9 @@ $.getJSON('../storage/markerData/markerData.json', function (data) {
     address: "7th Ln, Dehiwala-Mount Lavinia."
 
   });
-
-  google.maps.event.addListener(mas_marker, 'dblclick', function () { // marker onclick event
-    // Presentation Open part goes here
-    //alert('Add Slide show to open : ' + mas_marker.file);
-  });
-
-  google.maps.event.addListener(mas_marker, 'click', function () {
-    var content = "<center><img src='../logo.png' style='margin:10px 0;'><br><b style='font-size:17px;'>" + mas_marker.name + "</b><br>" + mas_marker.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
-    infoWindow.setContent(content);
-    infoWindow.open(map, mas_marker);
-  });
-
   //marker hover effect
   google.maps.event.addListener(mas_marker, 'mouseover', function () {
-    var content = "<center><img src='../logo.png' style='margin:10px 0;'><br><b style='font-size:17px;'>" + mas_marker.name + "</b><br>" + mas_marker.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
+    var content = "<center><img src='../logo.png' style='margin:10px 0;'><br><b style='font-size:17px;'>" + mas_marker.name + "</b><br>" + mas_marker.address + "</center>";
     infoWindow.setContent(content);
     infoWindow.open(map, mas_marker);
   });
@@ -131,7 +120,7 @@ $.getJSON('../storage/markerData/markerData.json', function (data) {
 
       //marker hover effect
       google.maps.event.addListener(marker, 'mouseover', function () {
-        var content = "<center><img src='../storage/logos/"+this.logo+"' style='margin:10px 0;'><br><b style='font-size:17px;'>" + this.name + "</b><br>" + this.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to spider all clients<br><i class='material-icons tiny'>beenhere</i>&nbsp;Double tap to open presentation";
+        var content = "<center><img src='../storage/logos/"+this.logo+"' style='margin:10px 0;'><br><b style='font-size:17px;'>" + this.name + "</b><br>" + this.address + "</center><br><br><i class='material-icons tiny'>beenhere</i>&nbsp;Click to open presentatin";
         infoWindow.setContent(content);
         infoWindow.open(map, this);
       });
@@ -140,7 +129,7 @@ $.getJSON('../storage/markerData/markerData.json', function (data) {
       });
 
       //Load available client in view
-      clients += '<div class="chip">'+place.name+'</div>';
+      clients += '<div class="chip">'+place.name+'<i class="close material-icons" data-name="'+place.name+'" onClick="deleteClient(this);">close</i></div>';
 
     }
   }

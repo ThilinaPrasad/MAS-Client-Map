@@ -15,239 +15,293 @@
 </head>
 
 <body>
-<div  style="background: url('../assets/loading.gif') center no-repeat #fff;" id="pageLoad"></div>
-<div id='app'>
-  <!--Add Clients Side Nav Bar-->
-  <ul id="add-client" class="sidenav" style="padding-bottom: 0;">
-    <li>
-      <div class="user-view">
-        <center>
-          <a href="#">
-            <center>
-              <img src="../assets/nav-logo.png">
-            </center>
-          </a>
-        </center>
-        <h4 align="center" class="white-text font_01" style="margin-top: 0;">Client Map</h4>
-      </div>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-      <h5 align="center" class="white-text font_01" style="margin-bottom: 0;">ADD NEW CLIENT</h5>
-    </li>
-    <li>
-      <div class="row" style="padding:0 20px;">
-        <form class="col s12">
-          <div class="row">
-            <div class="row" style="margin-bottom: 0;">
-              <div class="input-field col s12">
-                <input id="name" type="text" class="validate white-text">
-                <label for="name">Client Name</label>
-              </div>
-            </div>
-            <div class="file-field input-field" style="margin-bottom: 0;">
-              <div class="btn btn-small">
-                <span>
-                  <i class="material-icons large">filter_hdr</i>
-                </span>
-                <input type="file" multiple accept=".png,.jpg" id="logo" required>
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate white-text" type="text" placeholder="Client Logo">
-              </div>
-            </div>
-            <div class="row" style="margin-bottom: 0;">
-              <div class="input-field col s12">
-                <textarea id="address" class="materialize-textarea white-text validate"></textarea>
-                <label for="address">Address</label>
-              </div>
-            </div>
-            <div class="file-field input-field">
-              <div class="btn btn-small">
-                <span>
-                  <i class="material-icons large">file_upload</i>
-                </span>
-                <input type="file" multiple accept=".ppsx,.pps,.pptx,.ppt" id="ppt" required>
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate white-text" type="text" placeholder=".ppsx, .pptx, .pps, .ppt">
-              </div>
-            </div>
-            <button class="btn waves-effect waves-light red" type="reset" name="action" style="margin-bottom: 0;">Clear
-              <i class="material-icons right">cancel</i>
-            </button>
-            <button class="btn waves-effect waves-light" type="button" id="submit">Submit
-              <i class="material-icons right">send</i>
-            </button>
-        </form>
+  <div style="background: url('../assets/loading.gif') center no-repeat #fff;" id="pageLoad"></div>
+  <div id='app'>
+    <!--Add Clients Side Nav Bar-->
+    <ul id="add-client" class="sidenav" style="padding-bottom: 0;">
+      <li>
+        <div class="user-view">
+          <center>
+            <a href="#">
+              <center>
+                <img src="../assets/nav-logo.png">
+              </center>
+            </a>
+          </center>
+          <h4 align="center" class="white-text font_01" style="margin-top: 0;">Client Map</h4>
         </div>
-    </li>
-  </ul>
-  <!--Add Clients Side Nav Bar-->
-  <!--View Clients Side Nav Bar-->
-  <ul id="view-clients" class="sidenav" style="padding-bottom: 0;">
-    <li>
-      <div class="user-view">
-        <center>
-          <a href="#">
-            <center>
-              <img src="../assets/nav-logo.png">
-            </center>
-          </a>
-        </center>
-        <h4 align="center" class="white-text font_01" style="margin-top: 0;">Client Map</h4>
-      </div>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-      <h5 align="center" class="white-text font_01" style="margin-bottom: 10px;">View Available Clients</h5>
-    </li>
-    <li>
-      <div class="container" style="margin:0 20px;" id="clients-view">
-        <!--View of available client data-->
-       
-      </div>
-    </li>
-  </ul>
-  <!--View Clients Side Nav Bar-->
-  <!--Floting logo on map-->
-  <img src="../logo.png" class="overlay mas-logo" alt="MAS LOGO">
-
-  <!--Google map section-->
-  <div id="map" style="height:100vh; width:100vw;"></div>
-  <!--Floting Button Section-->
-  <div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">change_history</i>
-    </a>
-    <ul>
-      <li>
-        <a class="btn-floating red waves-effect waves-light tooltipped windowMode" data-position="left" data-tooltip="Present ON"
-          onclick="togglePresentMode(this);">
-          <i class="material-icons" id="presentMode">fullscreen</i>
-        </a>
       </li>
       <li>
-        <a class="btn-floating yellow darken-1 waves-effect waves-light sidenav-trigger tooltipped" data-target="add-client" data-position="left"
-          data-tooltip="Add New Client">
-          <i class="material-icons">add_circle_outline</i>
-        </a>
+        <div class="divider"></div>
       </li>
       <li>
-        <a class="btn-floating green waves-effect waves-light tooltipped sidenav-trigger" data-target="view-clients" data-position="left"
-          data-tooltip="View Clients">
-          <i class="material-icons">remove_red_eye</i>
-        </a>
+        <h5 align="center" class="white-text font_01" style="margin-bottom: 0;">ADD NEW CLIENT</h5>
+      </li>
+      <li>
+        <div class="row" style="padding:0 20px;">
+          <form class="col s12">
+            <div class="row">
+              <div class="row" style="margin-bottom: 0;">
+                <div class="input-field col s12">
+                  <input id="name" type="text" class="validate white-text">
+                  <label for="name">Client Name</label>
+                </div>
+              </div>
+              <div class="file-field input-field" style="margin-bottom: 0;">
+                <div class="btn btn-small">
+                  <span>
+                    <i class="material-icons large">filter_hdr</i>
+                  </span>
+                  <input type="file" multiple accept=".png,.jpg" id="logo" required>
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate white-text" type="text" placeholder="Client Logo">
+                </div>
+              </div>
+              <div class="row" style="margin-bottom: 0;">
+                <div class="input-field col s12">
+                  <textarea id="address" class="materialize-textarea white-text validate"></textarea>
+                  <label for="address">Address</label>
+                </div>
+              </div>
+              <div class="file-field input-field">
+                <div class="btn btn-small">
+                  <span>
+                    <i class="material-icons large">file_upload</i>
+                  </span>
+                  <input type="file" multiple accept=".ppsx,.pps,.pptx,.ppt" id="ppt" required>
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate white-text" type="text" placeholder=".ppsx, .pptx, .pps, .ppt">
+                </div>
+              </div>
+              <button class="btn waves-effect waves-light red" type="reset" name="action" style="margin-bottom: 0;">Clear
+                <i class="material-icons right">cancel</i>
+              </button>
+              <button class="btn waves-effect waves-light" type="button" id="submit">Submit
+                <i class="material-icons right">send</i>
+              </button>
+          </form>
+          </div>
       </li>
     </ul>
-  </div>
-  </div>
-  <!--Scripts Goes here-->
-  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
-  <script src="../scripts/jquery-3.3.1.min.js"></script>
-  <script src="../scripts/jquery-confirm.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbJ6Y_E_zZgyr5kRwYpAAnNSxHtiBnX98" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
-  <script>
-    require('../scripts/app.js')
-    require('../scripts/styles.js')
-  </script>
-  <script>
-    // Electron Application codes
-    const { ipcRenderer } = require('electron');
-    var copyFile = require('quickly-copy-file');
-    const path = require('path');
-    let present = false;
+    <!--Add Clients Side Nav Bar-->
+    <!--View Clients Side Nav Bar-->
+    <ul id="view-clients" class="sidenav" style="padding-bottom: 0;">
+      <li>
+        <div class="user-view">
+          <center>
+            <a href="#">
+              <center>
+                <img src="../assets/nav-logo.png">
+              </center>
+            </a>
+          </center>
+          <h4 align="center" class="white-text font_01" style="margin-top: 0;">Client Map</h4>
+        </div>
+      </li>
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li>
+        <h5 align="center" class="white-text font_01" style="margin-bottom: 10px;">View Available Clients</h5>
+      </li>
+      <li>
+        <div class="container" style="margin:0 20px;" id="clients-view">
+          <!--View of available client data-->
 
-    function togglePresentMode(element) {
-      if (!present) {
-        ipcRenderer.send('present:on');
+        </div>
+      </li>
+    </ul>
+    <!--View Clients Side Nav Bar-->
+    <!--Floting logo on map-->
+    <img src="../logo.png" class="overlay mas-logo" alt="MAS LOGO">
+
+    <!--Google map section-->
+    <div id="map" style="height:100vh; width:100vw;"></div>
+    <!--Floting Button Section-->
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">change_history</i>
+      </a>
+      <ul>
+        <li>
+          <a class="btn-floating red waves-effect waves-light tooltipped windowMode" data-position="left" data-tooltip="Present ON"
+            onclick="togglePresentMode(this);">
+            <i class="material-icons" id="presentMode">fullscreen</i>
+          </a>
+        </li>
+        <li>
+          <a class="btn-floating yellow darken-1 waves-effect waves-light sidenav-trigger tooltipped" data-target="add-client" data-position="left"
+            data-tooltip="Add New Client">
+            <i class="material-icons">add_circle_outline</i>
+          </a>
+        </li>
+        <li>
+          <a class="btn-floating green waves-effect waves-light tooltipped sidenav-trigger" data-target="view-clients" data-position="left"
+            data-tooltip="View Clients">
+            <i class="material-icons">remove_red_eye</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <!--Scripts Goes here-->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+    <script src="../scripts/jquery-3.3.1.min.js"></script>
+    <script src="../scripts/jquery-confirm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbJ6Y_E_zZgyr5kRwYpAAnNSxHtiBnX98" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
+    <script>
+      require('../scripts/app.js')
+      require('../scripts/styles.js')
+    </script>
+    <script>
+      // Electron Application codes
+      const { ipcRenderer } = require('electron');
+      var copyFile = require('quickly-copy-file');
+      const path = require('path');
+      let present = false;
+
+      function togglePresentMode(element) {
+        if (!present) {
+          ipcRenderer.send('present:on');
+          present = true;
+          $("#presentMode").text('fullscreen_exit');
+          $(element).attr('data-tooltip', 'Present OFF');
+        } else {
+          ipcRenderer.send('present:off');
+          present = false;
+          $("#presentMode").text('fullscreen');
+          $(element).attr('data-tooltip', 'Present ON');
+        }
+      }
+
+      ipcRenderer.on('present:on', function () {
         present = true;
         $("#presentMode").text('fullscreen_exit');
-        $(element).attr('data-tooltip', 'Present OFF');
-      } else {
-        ipcRenderer.send('present:off');
-        present = false;
+        $('.windowMode').attr('data-tooltip', 'Present OFF');
+      });
+
+      ipcRenderer.on('present:off', function () {
+        present = true;
         $("#presentMode").text('fullscreen');
-        $(element).attr('data-tooltip', 'Present ON');
-      }
-    }
+        $('.windowMode').attr('data-tooltip', 'Present ON');
+      });
 
-    ipcRenderer.on('present:on', function () {
-      present = true;
-      $("#presentMode").text('fullscreen_exit');
-      $('.windowMode').attr('data-tooltip', 'Present OFF');
-    });
+      ipcRenderer.on('error', function (e, msg) {
+        M.toast({ html: '<i class="material-icons">location_off</i>&nbsp;&nbsp;' + msg, classes: 'rounded' })
 
-    ipcRenderer.on('present:off', function () {
-      present = true;
-      $("#presentMode").text('fullscreen');
-      $('.windowMode').attr('data-tooltip', 'Present ON');
-    });
+      });
 
-    ipcRenderer.on('error', function (e, msg) {
-      M.toast({ html: '<i class="material-icons">location_off</i>&nbsp;&nbsp;' + msg, classes: 'rounded' })
+      ipcRenderer.on('success', function (e, msg) {
+        M.toast({ html: '<i class="material-icons">location_on</i>&nbsp;&nbsp;' + msg, classes: 'rounded' })
+        location.reload();
+      });
+    </script>
+    <script>
+      let response;
 
-    });
-
-    ipcRenderer.on('success', function (e, msg) {
-      M.toast({ html: '<i class="material-icons">location_on</i>&nbsp;&nbsp;' + msg, classes: 'rounded' })
-      location.reload();
-    });
-  </script>
-  <script>
- let response;
-
-    $("#submit").click(function () {
-      var cname = $('#name').val().trim();
-      var caddress = $('#address').val().trim();
-hashCode = function(str){
-    var hash = 0;
-    if (str.length == 0) return hash;
-    var x = Math.floor((Math.random() * 10) + 1);
-    for (i = 0; i < str.length; i++) {
-        char = str.charCodeAt(i);
-        hash = ((hash<<x)-hash)+char;
-        hash = hash & hash; // Convert to 32bit integer
-    }
-    return hash.toString();
-}
-
-//Logo upload
-let logo_src =  document.getElementById("logo").files[0].path;
-let logo_name = hashCode(logo_src)+"."+logo_src.split('.').pop();
-let logo_destDir = 'resources/app/storage/logos';
-let logo_path = path.join(logo_destDir,logo_name);
-//PPt upload
-      let src =  document.getElementById("ppt").files[0].path;
-      let filename = hashCode(src)+"."+src.split('.').pop();
-      let destDir = 'resources/app/storage/ppts';
-      let file_path = path.join(destDir,filename);
-      if ((cname + caddress).length > 0 && src.length>0) {
-        // Get Lat Long from address and save data
-        url = "https://maps.googleapis.com/maps/api/geocode/json?address="+caddress+"&key=AIzaSyCbJ6Y_E_zZgyr5kRwYpAAnNSxHtiBnX98"
-      $.get(url, function(data, status){
-        if(status=='success'){
-         var lat = data.results[0].geometry.location.lat;
-         var long = data.results[0].geometry.location.lng;
-         copyFile(src,file_path);
-        copyFile(logo_src,logo_path);
-        var newMarker = [{ name: cname, logo:logo_name ,file: filename, address: caddress, latitude: lat, longitude: long }];
-        ipcRenderer.send('save:marker', newMarker);
-        }else{
-          M.toast({ html: '<i class="material-icons">report</i>&nbsp;&nbsp;Entered Location Error. Try Again!', classes: 'rounded' })
+      $("#submit").click(function () {
+        var cname = $('#name').val().trim();
+        var caddress = $('#address').val().trim();
+        hashCode = function (str) {
+          var hash = 0;
+          if (str.length == 0) return hash;
+          var x = Math.floor((Math.random() * 10) + 1);
+          for (i = 0; i < str.length; i++) {
+            char = str.charCodeAt(i);
+            hash = ((hash << x) - hash) + char;
+            hash = hash & hash; // Convert to 32bit integer
+          }
+          return hash.toString();
         }
-    });
-      } else {
-        M.toast({ html: '<i class="material-icons">report</i>&nbsp;&nbsp;Fill all data before submitting!', classes: 'rounded' })
+
+        //Logo upload
+        let logo_src = document.getElementById("logo").files[0].path;
+        let logo_name = hashCode(logo_src) + "." + logo_src.split('.').pop();
+        let logo_destDir = 'resources/app/storage/logos';
+        let logo_path = path.join(logo_destDir, logo_name);
+        //PPt upload
+        let src = document.getElementById("ppt").files[0].path;
+        let filename = hashCode(src) + "." + src.split('.').pop();
+        let destDir = 'resources/app/storage/ppts';
+        let file_path = path.join(destDir, filename);
+        if ((cname + caddress).length > 0 && src.length > 0) {
+          // Get Lat Long from address and save data
+          url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + caddress + "&key=AIzaSyCbJ6Y_E_zZgyr5kRwYpAAnNSxHtiBnX98"
+          $.get(url, function (data, status) {
+            if (status == 'success') {
+              var lat = data.results[0].geometry.location.lat;
+              var long = data.results[0].geometry.location.lng;
+              copyFile(src, file_path);
+              copyFile(logo_src, logo_path);
+              var newMarker = [{ name: cname, logo: logo_name, file: filename, address: caddress, latitude: lat, longitude: long }];
+              ipcRenderer.send('save:marker', newMarker);
+            } else {
+              M.toast({ html: '<i class="material-icons">report</i>&nbsp;&nbsp;Entered Location Error. Try Again!', classes: 'rounded' })
+            }
+          });
+        } else {
+          M.toast({ html: '<i class="material-icons">report</i>&nbsp;&nbsp;Fill all data before submitting!', classes: 'rounded' })
+        }
+      });
+    </script>
+    <script>
+      const storage = require('electron-json-storage');
+      var url = path.join(__dirname + "/../storage/markerData");
+      storage.setDataPath(url);
+      function deleteClient(client) {
+        var name = $(client).attr('data-name');
+        $.confirm({
+          theme: 'supervan',
+          title: 'Delete Warning!',
+          content: 'You want delete ' + name + ' client marker ?',
+          buttons: {
+            confirm: {
+              text: 'Confirm',
+              btnClass: 'btn-red',
+              keys: ['enter'],
+              action: function (heyThereButton) {
+                $.getJSON('../storage/markerData/markerData.json', function (data) {
+                  console.log(data);
+                  for (var i = 0; i < data.length; i++) {
+                    if (data[i].name === name) {
+                      data.splice(data.indexOf(i), 1);
+                      break;
+                    }
+                  }
+                  storage.set('markerData', data,function (error) {
+                        console.log('saved');
+                      });
+                });
+                
+                $.confirm({
+          theme: 'supervan',
+          title: 'Deleted Succesfully!',
+          content: 'Refresh map to update the marker data!',
+          buttons: {
+            confirm: {
+              text: 'Reload',
+              btnClass: 'btn-green',
+              keys: ['enter'],
+              action: function () {
+                location.reload();
+              }
+            },
+          
+          }
+        });
+              }
+            },
+            cancel: function () {
+              location.reload();
+            }
+          }
+        });
       }
-    });
-  </script>
+    </script>
 </body>
 
 </html>
