@@ -8,7 +8,7 @@
   <title>MAS Client Map</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" href="../styles/jquery-confirm.min.css">
   <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../styles/style.css">
 
@@ -114,6 +114,8 @@
     </li>
   </ul>
   <!--View Clients Side Nav Bar-->
+  <!--Floting logo on map-->
+  <img src="../logo.png" class="overlay mas-logo" alt="MAS LOGO">
 
   <!--Google map section-->
   <div id="map" style="height:100vh; width:100vw;"></div>
@@ -146,9 +148,8 @@
   </div>
   <!--Scripts Goes here-->
   <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+  <script src="../scripts/jquery-3.3.1.min.js"></script>
+  <script src="../scripts/jquery-confirm.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbJ6Y_E_zZgyr5kRwYpAAnNSxHtiBnX98" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
@@ -156,16 +157,6 @@
     require('../scripts/app.js')
     require('../scripts/styles.js')
   </script>
-<script>
-  //page loading animation part 1
-$(window).on('load', function() {
-    $("#pageLoad").fadeOut('fast');
-});
-
-$(document).ready(function() {
-    //page loading animation part 2
-    $("#app").fadeIn('fast');});
-</script>
   <script>
     // Electron Application codes
     const { ipcRenderer } = require('electron');

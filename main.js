@@ -6,6 +6,9 @@ const { app, BrowserWindow, Menu, ipcMain } = electron;
 
 let mainMenu;
 
+//set production env
+//process.env.NODE_ENV = 'production';
+
 //load old markers
 const storage = require('electron-json-storage');
 storage.setDataPath(__dirname + "/storage/markerData");
@@ -44,12 +47,6 @@ const mainMenuTemplate = [
     {
         label: 'File',
         submenu: [
-            {
-                label: 'Add New Client',
-            },
-            {
-                label: 'View Clients',
-            },
             {
                 label: 'Quit',
                 accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
