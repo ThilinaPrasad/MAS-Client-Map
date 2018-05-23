@@ -74,7 +74,7 @@ const mainMenuTemplate = [
                 }
             },
             {
-                label: 'Present On',
+                label: 'Present ON',
                 accelerator: process.platform == 'darwin' ? 'Command+P' : 'Ctrl+P',
                 click() {
                     mainWindow.setFullScreen(true);
