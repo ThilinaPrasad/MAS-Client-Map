@@ -4,6 +4,7 @@ const path = require('path');
 const childProcess = require("child_process");
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
+
 let mainMenu;
 
 //set production env
@@ -92,7 +93,6 @@ const mainMenuTemplate = [
                 }
             },
             {role: 'reload'}
-         
         ]
     }
 
@@ -137,9 +137,6 @@ if (process.env.NODE_ENV !== 'production') {
                     click(item, focusedWindow) {
                         focusedWindow.toggleDevTools();
                     }
-                },
-                {
-                    role: 'reload'
                 }
             ]
         }
@@ -161,4 +158,3 @@ ipcMain.on('save:marker', function (e, newmarker) {
 
     
 });
-

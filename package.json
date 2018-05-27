@@ -7,7 +7,8 @@
     "start": "electron .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/build/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . --overwrite --asar=false --platform=win32 --arch=ia32 --icon=assets/build/icon.ico --prune=true --out=release-builds --version-string.CompanyName=\"Thilina Prasad\" --version-string.FileDescription=CE --version-string.ProductName=\"MAS Client Map\"",
-    "package-linux": "electron-packager . --overwrite --asar=false --platform=linux --arch=x64 --icon=assets/build/icon.png --prune=true --out=release-builds"
+    "package-linux": "electron-packager . --overwrite --asar=false --platform=linux --arch=x64 --icon=assets/build/icon.png --prune=true --out=release-builds",
+    "create-installer-win": "node scripts/installer.js"
   },
   "author": "Thilina Prasad",
   "license": "MIT",
@@ -17,6 +18,8 @@
     "quickly-copy-file": "^1.0.0"
   },
   "devDependencies": {
-    "electron-packager": "^12.1.0"
+    "electron-packager": "^12.1.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-winstaller": "^2.6.4"
   }
 }
