@@ -67,27 +67,26 @@ infoWindow = new google.maps.InfoWindow(); // create info window object
 
 // image icon for marker
 var image = {
-  url: 'https://thilinaprasad.github.io/MAS-Client-Map/marker.ico',
+  url: 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/marker_32x32.ico',
 };
 
 $.getJSON('../storage/markerData/markerData.json', function (data) {
 
 
   //Add MAS Marker
-  var coordinates = { lat: 6.8231014, lng: 79.8935539 };
+  var coordinates = { lat: 7.161378, lng: 79.8812409 };
   var mas_marker = new google.maps.Marker({
     position: coordinates,
     file: 'MAS SLIDES',
     icon: image,
     animation: google.maps.Animation.BOUNCE,
     map: map,
-    name: "MAS Intimates (Pvt) Ltd",
-    address: "7th Ln, Dehiwala-Mount Lavinia."
-
+    name: "MAS KREEDA-NIRMAAN",
+    address: "MAS KREEDA-NIRMAAN PHASE-II, EPZ, Katunayake"
   });
   //marker hover effect
   google.maps.event.addListener(mas_marker, 'mouseover', function () {
-    var content = "<center><img src='../logo.png' style='margin:10px 0;'><br><b style='font-size:17px;'>" + mas_marker.name + "</b><br>" + mas_marker.address + "</center>";
+    var content = "<center><img src='../mas_logo.png' style='margin:10px 0;'><br><b style='font-size:17px;'>" + mas_marker.name + "</b><br>" + mas_marker.address + "</center>";
     infoWindow.setContent(content);
     infoWindow.open(map, mas_marker);
   });
