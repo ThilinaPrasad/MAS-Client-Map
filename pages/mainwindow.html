@@ -272,6 +272,7 @@
     </script>
     <script>
       const storage = require('electron-json-storage');
+      const del = require('delete');
       var url = path.join(__dirname + "/../storage/markerData");
       storage.setDataPath(url);
       function deleteClient(client) {
@@ -287,9 +288,10 @@
               keys: ['enter'],
               action: function (heyThereButton) {
                 $.getJSON('../storage/markerData/markerData.json', function (data) {
-                  console.log(data);
                   for (var i = 0; i < data.length; i++) {
                     if (data[i].name === name) {
+                      del(['resources/app/storage/logos/'+(data[i]).logo]);
+                      del(['resources/app/storage/ppts/'+(data[i]).file]);
                       data.splice(data.indexOf(i), 1);
                       break;
                     }

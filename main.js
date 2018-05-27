@@ -8,7 +8,7 @@ const { app, BrowserWindow, Menu, ipcMain } = electron;
 let mainMenu;
 
 //set production env
-process.env.NODE_ENV = 'production';
+//process.env.NODE_ENV = 'production';
 
 //load old markers
 const storage = require('electron-json-storage');
@@ -147,6 +147,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 //save new marker data to json file
 ipcMain.on('save:marker', function (e, newmarker) {
+    storage.get('markerData', function (error, data) {
+        oldMarkers = data;
         storage.set('markerData', oldMarkers.concat(newmarker), function (error) {
             if (error) { 
                 mainWindow.webContents.send('error',"Error Happned while saving data. Please try again."); 
@@ -155,6 +157,5 @@ ipcMain.on('save:marker', function (e, newmarker) {
                 mainWindow.webContents.send('success',"Successfully added new marker !."); 
              }
         });
-
-    
+    });
 });
