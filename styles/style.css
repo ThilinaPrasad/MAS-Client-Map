@@ -6,6 +6,10 @@
     font-family: 'Play', sans-serif;
 }
 
+.font_02{
+    font-family: 'Noto Sans', sans-serif;
+}
+
 #pageLoad {
     position: fixed;
     left: 0px;
@@ -38,4 +42,26 @@
     position: absolute;
     top:55px;
     left:41%;
+}
+
+.marker-info{
+    width:200px;
+    position: absolute;
+    bottom: 85px;
+    right: 35px;
+    
+}
+
+.marker-info-2{
+    border: 0;
+
+}
+
+.marker-info-2 td{
+    padding: 3px 0;
+}
+
+.marker-font{
+    font-weight: 600;
+    font-size: 18px;
 }
