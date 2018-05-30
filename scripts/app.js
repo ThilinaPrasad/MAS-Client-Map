@@ -65,9 +65,17 @@ var map = new google.maps.Map(document.getElementById('map'), {
 });
 infoWindow = new google.maps.InfoWindow(); // create info window object
 
+
+
+// marker types
+const marker_r = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/marker_r_32x32.ico';
+const marker_b = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/marker_b_32x32.ico';
+const marker_y = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/marker_y_32x32.ico';
+const marker_p = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/marker_p_32x32.ico';
+
 // image icon for marker
 var image = {
-  url: 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/marker_32x32.ico',
+  url: marker_r,
 };
 
 $.getJSON('../storage/markerData/markerData.json', function (data) {
@@ -96,11 +104,21 @@ $.getJSON('../storage/markerData/markerData.json', function (data) {
 
   //ADD MAS MARKER
 
-  let new_id = data.length+1;
+  //add markers
+  //let new_id = data.length+1;
   let clients = '<div class="chip">MAS Intimates (Pvt) Ltd</div>';
   if (data.length > 0) {
     for (var i = 0; i < data.length; i++) {
       var place = data[i];
+      //change marker type 
+      switch(place.markerColor){
+        case 'red': image.url = marker_r; break;
+        case 'blue': image.url = marker_b; break;
+        case 'yellow': image.url = marker_y; break;
+        case 'purple': image.url = marker_p; break;
+        default:image.url = marker_r;
+      }
+      console.log(image.url);
       var coordinates = { lat: parseFloat(place.latitude), lng: parseFloat(place.longitude) };
       var marker = new google.maps.Marker({
         position: coordinates,
