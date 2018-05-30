@@ -64,6 +64,25 @@
                   <label for="address">Address</label>
                 </div>
               </div>
+              <p>
+                  <label>
+                    <input name="marker" type="radio" id="red" checked/>
+                    <span style="padding-left:9px; "><img src="../assets/marker_r_32x32.ico"></span>
+                  </label>
+                  <label>
+                      <input name="marker" type="radio" id="blue"/>
+                      <span style="padding-left:9px; "><img src="../assets/marker_b_32x32.ico"></span>
+                    </label>
+                    <label>
+                        <input name="marker" type="radio" id="yellow"/>
+                        <span style="padding-left:9px; "><img src="../assets/marker_y_32x32.ico"></span>
+                      </label>
+                      <label>
+                          <input name="marker" type="radio" id="purple"/>
+                          <span style="padding-left:9px; "><img src="../assets/marker_p_32x32.ico"></span>
+                        </label>
+                </p>
+
               <div class="file-field input-field">
                 <div class="btn btn-small">
                   <span>
@@ -240,6 +259,19 @@
           return hash.toString();
         }
 
+        //Marker type
+        var marker = "red";
+        if(document.getElementById('red').checked){
+          marker = 'red';
+        }else if(document.getElementById('blue').checked){
+          marker = 'blue';
+        }else if(document.getElementById('yellow').checked){
+          marker = 'yellow';
+        }else if(document.getElementById('purple').checked){
+          marker = 'purple';
+        }else{
+          marker = 'red';
+        }
         //Logo upload
         let logo_src = document.getElementById("logo").files[0].path;
         let logo_name = hashCode(logo_src) + "." + logo_src.split('.').pop();
@@ -259,7 +291,7 @@
               var long = data.results[0].geometry.location.lng;
               copyFile(src, file_path);
               copyFile(logo_src, logo_path);
-              var newMarker = [{ name: cname, logo: logo_name, file: filename, address: caddress, latitude: lat, longitude: long }];
+              var newMarker = [{ name: cname, logo: logo_name, file: filename, address: caddress, latitude: lat, longitude: long, markerColor:marker }];
               ipcRenderer.send('save:marker', newMarker);
             } else {
               M.toast({ html: '<i class="material-icons">report</i>&nbsp;&nbsp;Entered Location Error. Try Again!', classes: 'rounded' })
@@ -271,6 +303,16 @@
       });
     </script>
     <script>
+      //Delete element from an array
+      function deleteArrayElement(array,index){
+        var rtn = [];
+        for (var i = 0; i < array.length; i++) {
+          if(i!=index){
+            rtn.push(array[i]);
+          }
+        }
+        return rtn;
+      }
       const storage = require('electron-json-storage');
       const del = require('delete');
       var url = path.join(__dirname + "/../storage/markerData");
@@ -292,7 +334,7 @@
                     if (data[i].name === name) {
                       del(['resources/app/storage/logos/'+(data[i]).logo]);
                       del(['resources/app/storage/ppts/'+(data[i]).file]);
-                      data.splice(data.indexOf(i), 1);
+                      data = deleteArrayElement(data,i);
                       break;
                     }
                   }
