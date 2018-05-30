@@ -106,7 +106,7 @@ $.getJSON('../storage/markerData/markerData.json', function (data) {
 
   //add markers
   //let new_id = data.length+1;
-  let clients = '<div class="chip">MAS Intimates (Pvt) Ltd</div>';
+  let clients = '<div class="chip">MAS KREEDA</div>';
   if (data.length > 0) {
     for (var i = 0; i < data.length; i++) {
       var place = data[i];
