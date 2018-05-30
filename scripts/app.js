@@ -68,6 +68,7 @@ infoWindow = new google.maps.InfoWindow(); // create info window object
 
 
 // marker types
+const marker_mas = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/marker_mas.ico';
 const marker_r = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/marker_r_32x32.ico';
 const marker_b = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/marker_b_32x32.ico';
 const marker_y = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/marker_y_32x32.ico';
@@ -75,7 +76,7 @@ const marker_p = 'https://thilinaprasad.github.io/MAS-SUPPLY-CHAIN-MAP/assets/ma
 
 // image icon for marker
 var image = {
-  url: marker_r,
+  url: marker_mas,
 };
 
 $.getJSON('../storage/markerData/markerData.json', function (data) {
@@ -118,7 +119,7 @@ $.getJSON('../storage/markerData/markerData.json', function (data) {
         case 'purple': image.url = marker_p; break;
         default:image.url = marker_r;
       }
-      console.log(image.url);
+
       var coordinates = { lat: parseFloat(place.latitude), lng: parseFloat(place.longitude) };
       var marker = new google.maps.Marker({
         position: coordinates,
